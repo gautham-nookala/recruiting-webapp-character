@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { SKILL_LIST } from "../consts";
+import { SKILL_LIST, calculateModifier } from "../consts";
 
 const SkillCheck = ({ attributes, skillPoints }) => {
   const [selectedSkill, setSelectedSkill] = useState(SKILL_LIST[0].name);
   const [dc, setDC] = useState(10);
   const [rollResult, setRollResult] = useState(null);
   const [isSuccess, setIsSuccess] = useState(null);
-
-  const calculateModifier = (value) => Math.floor((value - 10) / 2);
 
   const handleRoll = () => {
     const randomRoll = Math.floor(Math.random() * 20) + 1; // Generate a random number between 1 and 20

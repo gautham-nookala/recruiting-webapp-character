@@ -56,3 +56,6 @@ export const SKILL_LIST = [
   { name: "Stealth", attributeModifier: "Dexterity" },
   { name: "Survival", attributeModifier: "Wisdom" },
 ];
+
+// Generalized function to calculate modifiers for any attribute
+export const calculateModifier = (value) => Math.floor((value - 10) / 2);

@@ -3,9 +3,16 @@ import AttributesSection from "./AttributesSection";
 import ClassesSection from "./ClassesSection";
 import SkillsSection from "./SkillsSection";
 import SkillCheck from "./SkillCheck";
-import { ATTRIBUTE_LIST, CLASS_LIST, SKILL_LIST } from "../consts";
+import {
+  ATTRIBUTE_LIST,
+  CLASS_LIST,
+  SKILL_LIST,
+  calculateModifier,
+} from "../consts";
 
 const MAX_ATTRIBUTE_TOTAL = 70;
+const MAX_ATTRIBUTE_TOTAL_ALERT =
+  "You have reached the maximum total attribute value of 70. Decrease another attribute to increase this one.";
 
 const CharacterSheet = ({
   character,
@@ -22,9 +29,7 @@ const CharacterSheet = ({
     0
   );
 
-  const intelligenceModifier = Math.floor(
-    (attributes["Intelligence"] - 10) / 2
-  );
+  const intelligenceModifier = calculateModifier(attributes["Intelligence"]);
 
   const skillPointsAvailable = Math.max(10 + 4 * intelligenceModifier, 0);
   const totalSkillPointsSpent = Object.values(skillPoints).reduce(
@@ -43,9 +48,7 @@ const CharacterSheet = ({
         [attribute]: attributes[attribute] + 1,
       });
     } else {
-      window.alert(
-        "You have reached the maximum total attribute value of 70. Decrease another attribute to increase this one."
-      );
+      window.alert(MAX_ATTRIBUTE_TOTAL_ALERT);
     }
   };
 
@@ -73,8 +76,6 @@ const CharacterSheet = ({
       });
     }
   };
-
-  const calculateModifier = (value) => Math.floor((value - 10) / 2);
 
   return (
     <div className="character-sheet">

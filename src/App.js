@@ -49,7 +49,6 @@ function App() {
   };
 
   const handleSave = () => {
-    console.log("Saving Characters:", characters); // Debug log
     saveCharacters(characters);
   };
 
